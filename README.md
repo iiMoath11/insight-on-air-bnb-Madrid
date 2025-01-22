@@ -6,3 +6,17 @@ Analyzing the growth of Airbnb listings, seasonal demand, and popular neighborho
 import pandas as pd
 data = pd.read_csv('calendar.csv')
 ```
+
+# in this code we know hopw much avalaibe and un avaliable data
+``` diff
+data.available.value_counts()
+```
+<img width="589" alt="Screenshot 2025-01-22 at 11 26 54 AM" src="https://github.com/user-attachments/assets/34908f89-0e72-4ae2-9140-a02bd37c44a1" />
+
+# We calculate the percentage of avaliable and unavaliable date
+``` diff
+avi_per = data['available'].value_counts(normalize = True)*100
+avi_per
+```
+<img width="589" alt="Screenshot 2025-01-22 at 11 27 13 AM" src="https://github.com/user-attachments/assets/cd2a3a76-53f4-41f5-828e-3d502b090853" />
+
