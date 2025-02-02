@@ -105,6 +105,71 @@ plt.show()
 ```
 <img width="716" alt="Screenshot 2025-02-02 at 2 16 18 PM" src="https://github.com/user-attachments/assets/019edd9d-ed7d-4648-ae34-40345d0c6718" />
 
+# Price Trends Over Time (Seasonal Analysis)
+You can analyze how prices fluctuate over different months to identify peak and off-peak seasons.
+``` diff
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the calendar dataset
+calendar_data = pd.read_csv('calendar.csv')
+
+# Convert date to datetime format
+calendar_data['date'] = pd.to_datetime(calendar_data['date'])
+
+# Extract month from date
+calendar_data['month'] = calendar_data['date'].dt.month
+
+# Convert price column to numeric (remove $ sign if present)
+calendar_data['price'] = calendar_data['price'].replace({'\$': '', ',': ''}, regex=True).astype(float)
+
+# Compute average price per month
+monthly_avg_price = calendar_data.groupby('month')['price'].mean()
+
+# Plotting the monthly average price trend
+plt.figure(figsize=(10, 5))
+monthly_avg_price.plot(kind='line', marker='o', color='blue')
+plt.title('Average Price Trend Over the Year')
+plt.xlabel('Month')
+plt.ylabel('Average Price (€)')
+plt.xticks(range(1, 13), ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+plt.grid()
+plt.show()
+```
+<img width="710" alt="Screenshot 2025-02-02 at 2 32 34 PM" src="https://github.com/user-attachments/assets/e80b1101-ee06-42c1-8b21-fb617f7f7ac9" />
+This analysis will help identify high-demand seasons where prices are at their peak.
+
+# Superhost vs. Regular Host: Impact on Price
+You can compare whether Superhosts tend to charge higher prices than regular hosts.
+
+``` diff
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the listings dataset
+listings_data = pd.read_csv('listings.csv')
+
+# Convert price column to numeric (remove $ sign if present)
+listings_data['price'] = listings_data['price'].replace({'\$': '', ',': ''}, regex=True).astype(float)
+
+# Group by superhost status and calculate average price
+superhost_prices = listings_data.groupby('host_is_superhost')['price'].mean()
+
+# Plotting
+plt.figure(figsize=(7, 5))
+superhost_prices.plot(kind='bar', color=['red', 'green'])
+plt.title('Average Price: Superhost vs. Regular Host')
+plt.xlabel('Superhost Status (t=True, f=False)')
+plt.ylabel('Average Price (€)')
+plt.xticks(rotation=0)
+plt.grid(axis='y')
+plt.show()
+```
+- Do Superhosts charge more? This will reveal whether being a Superhost justifies higher pricing.
+- Typically, Superhosts offer better customer experiences, faster response times, and higher ratings, which could lead to increased demand and pricing.
+- If Superhost prices are significantly higher, guests might prioritize them for quality service despite the price difference.
+<img width="710" alt="Screenshot 2025-02-02 at 2 35 05 PM" src="https://github.com/user-attachments/assets/7c72d370-fff4-4fad-81c6-3a0a3f7aa57d" />
+
 # Let us see the listings on a real map
 - Hotter Areas (Red/Yellow):
 1- High Density: The areas that appear in red or yellow (the "hot" colors) indicate higher density or concentration of listings. This means there are more listings in these areas. These areas are likely to have high demand.
