@@ -74,3 +74,21 @@ plt.xlabel('Room Type')
 plt.show()
 ```
 <img width="863" alt="Screenshot 2025-01-26 at 2 18 18 PM" src="https://github.com/user-attachments/assets/943180ed-5ed2-4999-9b0c-21ba06cac2a8" />
+
+# ✅ Which are the top 10 neighborhoods with the most listings?
+``` diff
+neighborhood_counts = listings['neighbourhood'].value_counts().head(10)
+print("Top 10 Neighborhoods by Listings:")
+print(neighborhood_counts)
+
+# Plot neighborhoods with most listings
+neighborhood_counts.plot(kind='bar', color='lightcoral')
+plt.title('Top 10 Neighborhoods by Listings')
+plt.ylabel('Number of Listings')
+plt.xlabel('Neighborhood')
+plt.xticks(rotation=90)
+plt.show()
+```
+<img width="530" alt="Screenshot 2025-02-02 at 2 15 16 PM" src="https://github.com/user-attachments/assets/9bff0546-83c8-4fff-8ad8-066384f2b6dc" />
+
+
